@@ -1,0 +1,31 @@
+global {
+  project for
+}
+
+host master {
+  openstack {
+    user_data {
+      apt-get update
+      apt-get -y install jed
+      wget https://apt.puppetlabs.com/puppetlabs-release-pc1-xenial.deb
+      dpkg -i puppetlabs-release-pc1-xenial.deb
+      apt-get update
+      apt-get -y install puppet-common augeas-tools facter
+      apt-get install ca-certificates -y
+      wget -q https://deb.theforeman.org/pubkey.gpg -O- | apt-key add -
+      echo "$(ifconfig | grep Bcast | cut -d: -f 2 | cut -d' ' -f 1) $(hostname).openstacklocal $(hostname)" >> /etc/hosts
+      echo "deb http://deb.theforeman.org/ xenial 1.15"   >> /etc/apt/sources.list.d/foreman.list
+      echo "deb http://deb.theforeman.org/ plugins 1.15"  >> /etc/apt/sources.list.d/foreman.list
+      apt-get update
+      apt-get install foreman-installer -y 
+      }
+    image Ubuntu16.04
+    flavor m1.medium
+    keypair master-key
+  }
+  
+  network eth0 {
+    net netsys_net
+    floating-ip 128.39.121.166
+  }
+}
