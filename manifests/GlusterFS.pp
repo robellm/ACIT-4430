@@ -1,0 +1,3 @@
+package {'glusterfs':
+        ensure => installed
+}
