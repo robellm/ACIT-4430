@@ -22,3 +22,8 @@ user { "tim":
         shell => '/bin/bash',
         managehome => 'true',
 }
+
+group {"developers":
+        ensure => present,
+        members => 'janet', 'tim'
+}
