@@ -1,3 +1,3 @@
-package {'glusterfs':
-        ensure => installed
+package {'glusterfs-server':
+        ensure => present,
 }
