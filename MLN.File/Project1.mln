@@ -1,0 +1,69 @@
+global {
+        project project1
+}
+
+superclass common {
+        openstack {
+                user_data {
+                        adduser --disabled-password --gecos "" bob
+                        adduser --disabled-password --gecos "" janet
+                        adduser --disabled-password --gecos "" alice
+                        adduser --disabled-password --gecos "" tim
+                        addgroup developers
+                        adduser janet,tim developers
+                        apt-get update
+                        wget https://apt.puppetlabs.com/puppetlabs-release-pc1-xenial.deb
+                        dpkg -i puppetlabs-release-pc1-xenial.deb
+                        apt-get update
+                        apt-get -y install puppet-agent
+                        echo "10.0.51.85 master16.openstacklocal master16" >> /etc/hosts
+                        wget https://raw.githubusercontent.com/robellm/ACIT-4430/main/manifests/agent.pp
+                        /opt/puppetlabs/puppet/bin/puppet apply agent.pp
+                }
+                image Ubuntu16.04
+                flavor m1.small
+                keypair masterkey
+        }
+        network eth0 {
+                net netsys_net
+                address dhcp
+        }
+}
+
+superclass storage {
+        superclass common
+        openstack {
+                user_data {
+                        wget https://raw.githubusercontent.com/robellm/ACIT-4430/main/manifests/GlusterFS.pp
+                        /opt/puppetlabs/puppet/bin/puppet apply GlusterFS.pp
+                }
+        }
+}
+host vm_storage-server1 {
+        superclass storage
+}
+host vm_storage-server2 {
+        superclass storage
+}
+
+superclass developer {
+        superclass common
+        openstack {
+                user_data {
+                        wget https://raw.githubusercontent.com/robellm/ACIT-4430/main/manifests/developers.pp
+                        /opt/puppetlabs/puppet/bin/puppet apply developers.pp
+                }
+        }
+}
+host vm_developer-server1 {
+        superclass developer
+}
+host vm_developer-server2 {
+        superclass developer
+}
+host vm_compiler-server1 {
+        superclass common
+}
+host vm_compiler-server2 {
+        superclass common
+}
