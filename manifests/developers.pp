@@ -1,12 +1,12 @@
 package { 'emacs':
-        ensure => present,
+        ensure => installed,
 }
 package { 'jed':
-        ensure => present,
+        ensure => installed,
 }
 package { 'subversion':
-        ensure => present,
+        ensure => installed,
 }
 package { 'git':
-        ensure => present,
+        ensure => installed,
 }
