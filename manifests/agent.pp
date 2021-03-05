@@ -1,8 +1,8 @@
-$master = "master16.openstacklocal"
-$master_ip = "10.0.51.85"
+$master = "master.openstacklocal"
+$master_ip = "10.0.52.92"
 $interval = "600"
 
-host { 'master16.openstacklocal' :
+host { 'master.openstacklocal' :
         name => $master,
         ensure => present,
         host_aliases => "master",
