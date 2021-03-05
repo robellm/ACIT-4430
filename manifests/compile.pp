@@ -1,9 +1,9 @@
 package { 'gcc' :
-        ensure => present,
+        ensure => installed,
 }
 package { 'build-essential' :
-        ensure => present,
+        ensure => installed,
 }
 package { 'binutils' :
-        ensure => present,
+        ensure => installed,
 }
