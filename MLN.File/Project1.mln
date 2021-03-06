@@ -9,13 +9,13 @@ superclass common {
                         adduser --disabled-password --gecos "" janet
                         adduser --disabled-password --gecos "" alice
                         adduser --disabled-password --gecos "" tim
+                        echo bob:U6aMy0wojraho | sudo chpasswd -e
+                        echo janet:U6aMy0wojraho | sudo chpasswd -e
+                        echo alice:U6aMy0wojraho | sudo chpasswd -e
+                        echo tim:U6aMy0wojraho | sudo chpasswd -e
                         addgroup developers
                         adduser janet developers
                         adduser tim developers
-                        usermod -G root bob
-                        usermod -G root janet
-                        usermod -G root alice
-                        usermod -G root tim
                         apt-get update
                         wget https://apt.puppetlabs.com/puppetlabs-release-pc1-xenial.deb
                         dpkg -i puppetlabs-release-pc1-xenial.deb
