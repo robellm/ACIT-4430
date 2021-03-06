@@ -21,7 +21,7 @@ superclass common {
                         dpkg -i puppetlabs-release-pc1-xenial.deb
                         apt-get update
                         apt-get -y install puppet-agent
-                        echo "10.0.51.85 master16.openstacklocal master16" >> /etc/hosts
+                        echo "10.0.52.92 master.openstacklocal master" >> /etc/hosts
                         wget https://raw.githubusercontent.com/robellm/ACIT-4430/main/manifests/agent.pp
                         /opt/puppetlabs/puppet/bin/puppet apply agent.pp
                 }
