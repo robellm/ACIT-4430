@@ -1,13 +1,38 @@
-$users = ['bob', 'janet', 'alice', 'tim']
-user { $users:
-        ensure => present,
-        user => root,
-        shell => '/bin/bash',
-        managehome => 'true',
-}
+class users {
+        group { 'developer':
+                ensure => present,
+        }
 
-$developers = ['janet', 'tim']
-group { $developers:
-        ensure => present,
-        gid => 500,
+        user { 'bob':
+                ensure => present,
+                comment => 'This is 4 BOBBY',
+                shell => '/bin/bash',
+                home => '/home/bob',
+                groups => ['sudo'],
+                managehome => 'true',
+        }
+        user { 'janet':
+                ensure => present,
+                comment => 'JANET, FROM DEVELOPERS GROUP',
+                shell => '/bin/bash',
+                home => '/home/janet',
+                groups => ['sudo', 'developer'],
+                managehome => 'true',
+        }
+        user { 'alice':
+                ensure => present,
+                comment => 'ALICE FROM WONDERLAND',
+                shell => '/bin/bash',
+                home => '/home/alice',
+                groups => ['sudo'],
+                managehome => 'true',
+        }
+        user { 'tim':
+                ensure => present,
+                comment => 'TIM, FROM DEVELOPERS GROUP',
+                shell => '/bin/bash',
+                home => '/home/bob',
+                groups => ['sudo', 'developer'],
+                managehome => 'true',
+        }
 }
