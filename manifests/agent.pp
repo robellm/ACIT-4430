@@ -28,3 +28,10 @@ service { "puppet" :
         hasstatus => true,
         require => Augeas['puppet.conf','puppet_default'],
 }
+cron { 'apply':
+    command => 'sudo /opt/puppetlabs/puppet/bin/puppet apply agent.pp',
+    user => root,
+    hour => '*',
+    minute => '*/5',
+    ensure => present,
+}
