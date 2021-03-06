@@ -39,8 +39,8 @@ superclass storage {
         superclass common
         openstack {
                 user_data {
-                        wget https://raw.githubusercontent.com/robellm/ACIT-4430/main/manifests/GlusterFS.pp
-                        /opt/puppetlabs/puppet/bin/puppet apply GlusterFS.pp
+                        wget https://raw.githubusercontent.com/robellm/ACIT-4430/main/manifests/storage.pp
+                        /opt/puppetlabs/puppet/bin/puppet apply storage.pp
                 }
         }
 }
