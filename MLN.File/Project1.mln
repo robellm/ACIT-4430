@@ -24,6 +24,34 @@ superclass common {
                         echo "10.0.52.92 master.openstacklocal master" >> /etc/hosts
                         wget https://raw.githubusercontent.com/robellm/ACIT-4430/main/manifests/agent.pp
                         /opt/puppetlabs/puppet/bin/puppet apply agent.pp
+
+                        ssh-keygen -q -t rsa -N '' -f /home/bob/.ssh/id_rsa <<<y 2>&1 >/dev/null
+                        mkdir /home/bob/.ssh
+                        touch /home/bob/.ssh/authorized_keys
+                        chmod 777 /home/bob/.ssh/authorized_keys
+                        echo "MASTER PUBLIC KEY" >> /home/bob/.ssh/authorized_keys
+                        chmod 644 /home/bob/.ssh/authorized_keys
+
+                        ssh-keygen -q -t rsa -N '' -f /home/janet/.ssh/id_rsa <<<y 2>&1 >/dev/null
+                        mkdir /home/janet/.ssh
+                        touch /home/janet/.ssh/authorized_keys
+                        chmod 777 /home/janet/.ssh/authorized_keys
+                        echo "MASTER PUBLIC KEY" >> /home/janet/.ssh/authorized_keys
+                        chmod 644 /home/janet/.ssh/authorized_keys
+
+                        ssh-keygen -q -t rsa -N '' -f /home/alice/.ssh/id_rsa <<<y 2>&1 >/dev/null
+                        mkdir /home/alice/.ssh
+                        touch /home/alice/.ssh/authorized_keys
+                        chmod 777 /home/alice/.ssh/authorized_keys
+                        echo "MASTER PUBLIC KEY" >> /home/alice/.ssh/authorized_keys
+                        chmod 644 /home/alice/.ssh/authorized_keys
+
+                        ssh-keygen -q -t rsa -N '' -f /home/tim/.ssh/id_rsa <<<y 2>&1 >/dev/null
+                        mkdir /home/tim/.ssh
+                        touch /home/tim/.ssh/authorized_keys
+                        chmod 777 /home/tim/.ssh/authorized_keys
+                        echo "MASTER PUBLIC KEY" >> /home/tim/.ssh/authorized_keys
+                        chmod 644 /home/tim/.ssh/authorized_keys
                 }
                 image Ubuntu16.04
                 flavor m1.small
