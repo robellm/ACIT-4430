@@ -5,7 +5,7 @@ $interval = "600"
 host { 'masterp.openstacklocal' :
         name => $masterp,
         ensure => present,
-        host_aliases => "master",
+        host_aliases => "masterp",
         ip => $master_ip
 }
 
