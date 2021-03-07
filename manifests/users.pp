@@ -31,7 +31,7 @@ class users {
                 ensure => present,
                 comment => 'TIM, FROM DEVELOPERS GROUP',
                 shell => '/bin/bash',
-                home => '/home/bob',
+                home => '/home/tim',
                 groups => ['sudo', 'developer'],
                 managehome => 'true',
         }
