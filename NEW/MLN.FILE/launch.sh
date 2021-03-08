@@ -15,6 +15,7 @@ echo " "
 echo " "
 
 echo "The current status of MLN ... "
+echo " "
 sleep 2
 mln status -p project
 
@@ -52,3 +53,4 @@ echo "Listing ALL the signed certificates"
 echo " "
 sleep 2
 /opt/puppetlabs/puppet/bin/puppet cert list --all
+echo " "
