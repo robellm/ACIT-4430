@@ -16,6 +16,10 @@ superclass common {
                         addgroup developers
                         adduser janet developers
                         adduser tim developers
+                        sudo usermod -aG sudo bob
+                        sudo usermod -aG sudo janet
+                        sudo usermod -aG sudo alice
+                        sudo usermod -aG sudo tim
                         apt-get update
                         wget https://apt.puppetlabs.com/puppetlabs-release-pc1-xenial.deb
                         dpkg -i puppetlabs-release-pc1-xenial.deb
