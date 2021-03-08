@@ -1,31 +1,46 @@
 #!/bin/bash
+
 echo "Building MLN"
-sudo mln build -f ./project1.mln
+sleep 2
+sudo mln build -f ./project.mln
+echo "\n\n\n "
 
 echo "Starting MLN"
-sleep 5
-sudo mln start -p project1
+sleep 3
+sudo mln start -p project
+echo "\n\n\n"
 
-echo "Waiting 40 seconds for intstances to deploy..."
-sleep 40
-
-sudo mln status -p project1
+echo "Waiting 10 seconds for intstances to deploy..."
+sleep 10
+sudo mln status -p project
 
 VAR=true
 
 while $VAR; do
-if sudo mln status -p project1 | grep -q "down"; then
-    echo "One or more instances down."
+if sudo mln status -p project | grep -q "down"; then
+    echo "\n\n"
+    echo "One or more instances down.."
     echo "Rebuilding project and instances..."
-    sudo mln remove -p project1 -f
-    sleep 15
-    sudo mln build -f ./project1.mln -r
+    sleep 2
+    sudo mln remove -p project -f
+    sleep 5
+    sudo mln build -f ./project.mln -r
+    sleep 5
+    sudo mln start -p project
+    echo "\n\n"
+    echo "Letting instaces start up.. 10 seconds..."
     sleep 10
-    sudo mln start -p project1
-    echo "Letting instaces start up. 40 seconds..."
-    sleep 40
 else
     echo "Finished"
     VAR=false
 fi
 done
+
+echo "Signing CERTIFICATES FROM THE AGENT"
+sleep 2
+sudo /opt/puppetlabs/puppet/bin/puppet cert sign --all
+echo "\n\n"
+sleep 3
+echo "Listing All the signed certificates"
+sleep 2
+sudo /opt/puppetlabs/puppet/bin/puppet cert list --all
