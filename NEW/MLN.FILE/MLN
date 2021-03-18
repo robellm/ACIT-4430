@@ -5,21 +5,6 @@ global {
 superclass common {
         openstack {
                 user_data {
-                        adduser --disabled-password --gecos "" --shell /bin/bash bob
-                        adduser --disabled-password --gecos "" --shell /bin/bash janet
-                        adduser --disabled-password --gecos "" --shell /bin/bash alice
-                        adduser --disabled-password --gecos "" --shell /bin/bash tim
-                        echo bob:bob | chpasswd
-                        echo janet:janet | chpasswd
-                        echo alice:alice | chpasswd
-                        echo tim:tim | chpasswd
-                        addgroup developers
-                        adduser janet developers
-                        adduser tim developers
-                        usermod -aG sudo bob
-                        usermod -aG sudo janet
-                        usermod -aG sudo alice
-                        usermod -aG sudo tim
                         apt-get update
                         wget https://apt.puppetlabs.com/puppetlabs-release-pc1-xenial.deb
                         dpkg -i puppetlabs-release-pc1-xenial.deb
